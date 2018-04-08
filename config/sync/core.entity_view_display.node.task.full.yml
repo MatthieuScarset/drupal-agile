@@ -1,0 +1,49 @@
+uuid: db39d1c0-2c3d-40f3-8923-643598d49680
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.full
+    - field.field.node.task.assignees
+    - field.field.node.task.body
+    - field.field.node.task.project
+    - node.type.task
+  module:
+    - text
+    - user
+id: node.task.full
+targetEntityType: node
+bundle: task
+mode: full
+content:
+  assignees:
+    weight: 2
+    label: hidden
+    settings:
+      view_mode: compact
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+  body:
+    label: hidden
+    type: text_default
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  project:
+    weight: 1
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+hidden:
+  langcode: true

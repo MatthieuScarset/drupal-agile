@@ -1,0 +1,11 @@
+uuid: d36dbe75-7cf3-4c6c-aa74-ddae44837040
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.task
+id: node.task
+target_entity_type_id: node
+target_bundle: task
+default_langcode: site_default
+language_alterable: true

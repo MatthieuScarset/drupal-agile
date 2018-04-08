@@ -1,0 +1,17 @@
+uuid: a4adaf99-53e1-4e9d-b081-e455629ae2c8
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Task
+type: task
+description: 'A task is a unit of work contained within a story or a project.'
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: true

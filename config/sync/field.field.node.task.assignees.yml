@@ -1,0 +1,25 @@
+uuid: cdff4121-565c-4d5b-a279-b19426694395
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.assignees
+    - node.type.task
+id: node.task.assignees
+field_name: assignees
+entity_type: node
+bundle: task
+label: Assignee(s)
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: assignees
+      display_name: entity_reference_1
+      arguments: {  }
+field_type: entity_reference

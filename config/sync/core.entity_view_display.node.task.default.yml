@@ -1,0 +1,47 @@
+uuid: 20f84c14-ea99-47f7-94e7-5dbbd7668610
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.task.assignees
+    - field.field.node.task.body
+    - field.field.node.task.project
+    - node.type.task
+  module:
+    - text
+    - user
+id: node.task.default
+targetEntityType: node
+bundle: task
+mode: default
+content:
+  assignees:
+    weight: 103
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  project:
+    weight: 102
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+hidden:
+  langcode: true
