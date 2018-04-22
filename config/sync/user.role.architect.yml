@@ -1,0 +1,9 @@
+uuid: 0f8f6c8e-5aa7-4a81-8b9e-ac79841d4004
+langcode: en
+status: true
+dependencies: {  }
+id: architect
+label: Architect
+weight: -5
+is_admin: null
+permissions: {  }

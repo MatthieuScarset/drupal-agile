@@ -1,0 +1,25 @@
+uuid: 85ab8442-1334-4a6a-bcfa-7394970e9e68
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.assignees
+    - node.type.issue
+id: node.issue.assignees
+field_name: assignees
+entity_type: node
+bundle: issue
+label: Assignees
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: assignees
+      display_name: assignees
+      arguments: {  }
+field_type: entity_reference

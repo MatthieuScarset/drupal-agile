@@ -1,0 +1,14 @@
+uuid: 30d38801-74bf-4f17-bc81-dfcb762778f6
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.analyst
+  module:
+    - user
+id: user_add_role_action.analyst
+label: 'Add the Business Analyst role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: analyst

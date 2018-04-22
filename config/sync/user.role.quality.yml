@@ -1,0 +1,9 @@
+uuid: 1b104827-92a8-43d8-86b1-4afeff98f63f
+langcode: en
+status: true
+dependencies: {  }
+id: quality
+label: 'Quality Analyst'
+weight: -2
+is_admin: null
+permissions: {  }

@@ -1,0 +1,37 @@
+uuid: bd5e2560-1769-47b6-b560-4a9a0244b4f1
+langcode: en
+status: true
+dependencies:
+  config:
+    - comment.type.discussion
+    - field.field.comment.discussion.comment
+    - field.field.comment.discussion.links
+  module:
+    - link
+    - text
+id: comment.discussion.default
+targetEntityType: comment
+bundle: discussion
+mode: default
+content:
+  comment:
+    weight: 101
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  links:
+    weight: 102
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+hidden:
+  langcode: true

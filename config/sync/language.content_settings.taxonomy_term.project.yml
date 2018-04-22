@@ -8,4 +8,4 @@ id: taxonomy_term.project
 target_entity_type_id: taxonomy_term
 target_bundle: project
 default_langcode: site_default
-language_alterable: false
+language_alterable: true

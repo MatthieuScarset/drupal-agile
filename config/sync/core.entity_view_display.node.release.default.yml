@@ -1,0 +1,45 @@
+uuid: 40a04cf6-17db-4d07-9baf-21f314c35477
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.release.body
+    - field.field.node.release.issues
+    - field.field.node.release.project
+    - node.type.release
+  module:
+    - text
+    - user
+id: node.release.default
+targetEntityType: node
+bundle: release
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  issues:
+    weight: 103
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  links:
+    weight: 100
+    region: content
+  project:
+    weight: 102
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+hidden:
+  langcode: true

@@ -1,0 +1,14 @@
+uuid: 483657e3-0206-4472-9784-e7ac98389cf3
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.quality
+  module:
+    - user
+id: user_remove_role_action.quality
+label: 'Remove the Quality Analyst role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: quality

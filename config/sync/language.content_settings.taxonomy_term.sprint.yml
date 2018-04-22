@@ -1,0 +1,11 @@
+uuid: 64fdcf2b-1b1c-4b47-86b7-6955e57efb72
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.sprint
+id: taxonomy_term.sprint
+target_entity_type_id: taxonomy_term
+target_bundle: sprint
+default_langcode: site_default
+language_alterable: true

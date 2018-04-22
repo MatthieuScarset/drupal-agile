@@ -1,0 +1,9 @@
+uuid: da90b1cb-6df1-4802-b376-ad4859f52a6b
+langcode: en
+status: true
+dependencies: {  }
+id: lead
+label: 'Technical Lead'
+weight: -4
+is_admin: null
+permissions: {  }

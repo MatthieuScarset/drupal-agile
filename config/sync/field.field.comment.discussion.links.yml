@@ -1,0 +1,23 @@
+uuid: 0637c4ec-a4ce-461b-82f4-0df8b71e36fc
+langcode: en
+status: true
+dependencies:
+  config:
+    - comment.type.discussion
+    - field.storage.comment.links
+  module:
+    - link
+id: comment.discussion.links
+field_name: links
+entity_type: comment
+bundle: discussion
+label: Links
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 0
+field_type: link

@@ -4,3 +4,9 @@ client: 1
 client_message: 'Client @term already exists.'
 project_code: 1
 project_code_message: '@term already exists.'
+sprint: 0
+sprint_message: 'Term @term already exists in vocabulary @vocabulary.'
+issue_type: 1
+issue_type_message: 'Term @term already exists in vocabulary @vocabulary.'
+version: 0
+version_message: 'Term @term already exists in vocabulary @vocabulary.'

@@ -1,0 +1,14 @@
+uuid: df4c23ea-4cc3-4033-948d-0f37414fbfda
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.quality
+  module:
+    - user
+id: user_add_role_action.quality
+label: 'Add the Quality Analyst role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: quality

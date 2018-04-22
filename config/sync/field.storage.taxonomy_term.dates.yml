@@ -1,0 +1,20 @@
+uuid: 45ced4c7-cd26-4075-90f0-5f6a5f286260
+langcode: en
+status: true
+dependencies:
+  module:
+    - datetime_range
+    - taxonomy
+id: taxonomy_term.dates
+field_name: dates
+entity_type: taxonomy_term
+type: daterange
+settings:
+  datetime_type: date
+module: datetime_range
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

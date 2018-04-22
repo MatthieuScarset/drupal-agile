@@ -18,27 +18,19 @@ use Symfony\Component\Yaml\Yaml;
 class ScriptHandler {
 
   /**
-   * Drush config file.
-   *
-   * @var string $configFile
-   */
-  protected static $configFile = '.drush.yml';  
-
-  /**
    * Parse the config file and return settings.
    *
    * @param boolean $var
    * @return mixed
    *    The array of settings OR the requested setting value.
    */
-  protected static function getSettings($var = FALSE) {
-    $configFile = file_get_contents(self::$configFile);
-    $defaultSettings = file_get_contents('example' . self::$configFile);
-    $settings = array_merge(
-      Yaml::parse($defaultSettings),
-      Yaml::parse($configFile)
-    );
-    return ($var && isset($settings[$var])) ? $settings[$var] : $settings;
+  protected static function loadSettings() {
+    // Load .env file if exists
+    $projectRoot = self::getComposerRoot();
+    if (file_exists($projectRoot . '/.env')) {
+      $dotenv = new \Dotenv\Dotenv($projectRoot);
+      $dotenv->load();
+    }
   }
 
   protected static function getDrupalRoot() {
@@ -127,8 +119,10 @@ class ScriptHandler {
   }
 
   public static function createRequiredFiles(Event $event) {
+    self::loadSettings();
     $fs = new Filesystem();
     $drupalRoot = static::getDrupalRoot();
+    $composerRoot = static::getComposerRoot();
 
     $dirs = [
       'modules',
@@ -144,13 +138,12 @@ class ScriptHandler {
       }
     }
 
-
     // Prepare the settings file for installation
     if (!$fs->exists($drupalRoot . '/sites/default/settings.php')) {
       $fs->chmod($drupalRoot . '/sites/default/', 0755);
       $fs->copy($drupalRoot . '/sites/default/default.settings.php', $drupalRoot . '/sites/default/settings.php');
       $fs->chmod($drupalRoot . '/sites/default/settings.php', 0666);
-      $event->getIO()->write("Create a sites/default/settings.php file with chmod 0666");
+      $event->getIO()->write("Created a sites/default/settings.php file with chmod 0666");
     }
 
     // Prepare the services file for installation
@@ -158,7 +151,7 @@ class ScriptHandler {
       $fs->chmod($drupalRoot . '/sites/default/', 0755);
       $fs->copy($drupalRoot . '/sites/default/default.services.yml', $drupalRoot . '/sites/default/services.yml');
       $fs->chmod($drupalRoot . '/sites/default/services.yml', 0666);
-      $event->getIO()->write("Create a sites/default/services.yml file with chmod 0666");
+      $event->getIO()->write("Created a sites/default/services.yml file with chmod 0666");
     }
 
     // Create the files directory with chmod 0777
@@ -166,28 +159,28 @@ class ScriptHandler {
       $oldmask = umask(0);
       $fs->mkdir($drupalRoot . '/sites/default/files', 0777);
       umask($oldmask);
-      $event->getIO()->write("Create a sites/default/files directory with chmod 0777");
+      $event->getIO()->write("Created a sites/default/files directory with chmod 0777");
     }
 
     // Prepare the local settings file for installation with chmod 666.
     if (!$fs->exists($drupalRoot . '/sites/default/settings.local.php') and $fs->exists($drupalRoot . '/sites/default/example.settings.local.php')) {
       $fs->copy($drupalRoot . '/sites/default/example.settings.local.php', $drupalRoot . '/sites/default/settings.local.php');
       $fs->chmod($drupalRoot . '/sites/default/settings.local.php', 0666);
-      $event->getIO()->write("Create a sites/default/settings.local.php file with chmod 0666");
+      $event->getIO()->write("Created a sites/default/settings.local.php file with chmod 0666");
     }
 
     // Prepare the local services file for development.
     if (!$fs->exists($drupalRoot . '/sites/default/services.development.yml') and $fs->exists($drupalRoot . '/sites/default/example.services.development.yml')) {
       $fs->copy($drupalRoot . '/sites/default/example.services.development.yml', $drupalRoot . '/sites/default/services.development.yml');
       $fs->chmod($drupalRoot . '/sites/default/services.development.yml', 0666);
-      $event->getIO()->write("Create a sites/default/settings.local.php file with chmod 0666");
+      $event->getIO()->write("Created a sites/default/settings.local.php file with chmod 0666");
     }
 
-    // Create the files directory with chmod 0777
-    if (!$fs->exists(self::$configFile) and $fs->exists('example' . self::$configFile)) {
-      $fs->copy('example' . self::$configFile, self::$configFile);
-      $fs->chmod(self::$configFile, 0666);
-      $event->getIO()->write("Create " . self::$configFile . " file with chmod 0666");
+    // Create the files directory with chmod 0666
+    if (!$fs->exists($composerRoot . '/.env') and $fs->exists($composerRoot . '/example.env')) {
+      $fs->copy($composerRoot . 'example.env', $composerRoot . '.env');
+      $fs->chmod($composerRoot . '.env', 0666);
+      $event->getIO()->write("Created .env file with chmod 0666");
     }
   }
 
@@ -345,29 +338,12 @@ class ScriptHandler {
    * @param Event $event
    */
   public static function siteInstall(Event $event) {
+    self::loadSettings();
     $drush = self::getDrush();
     $drupalRoot = static::getDrupalRoot();
-    $settings = self::getSettings();
     $process = new ProcessExecutor($event->getIO());
     $event->getIO()->write("Reinstall Drupal");
-    $process->execute($drush . " site-install " . $settings['profile']. " -y -r " . $drupalRoot);
-  }
-  /**
-   * Reset Drupal site settings.
-   *
-   * @param Event $event
-   */
-  public static function siteConfig(Event $event) {
-    $drush = self::getDrush();
-    $drupalRoot = static::getDrupalRoot();
-    $settings = self::getSettings();
-    
-    $process = new ProcessExecutor($event->getIO());
-    foreach ($settings['custom'] as $key => $attributes) {
-      foreach($attributes as $attribute => $value) {
-        $process->execute($drush . ' config-set ' . $key . ' ' . $attribute . ' ' . $value . ' -y -r ' . $drupalRoot);
-      }
-    }
+    $process->execute($drush . " site-install " . getenv('INSTALL_PROFILE') . " -y -r " . $drupalRoot);
   }
   /**
    * Reset Drupal user.
@@ -375,14 +351,18 @@ class ScriptHandler {
    * @param Event $event
    */
   public static function siteUser(Event $event) {
+    self::loadSettings();
     $drush = self::getDrush();
     $drupalRoot = static::getDrupalRoot();
-    $settings = self::getSettings();
     $process = new ProcessExecutor($event->getIO());
-    $event->getIO()->write("Set site user");
-    $process->execute($drush . ' user-create ' . $settings['account']['name'] . ' --password="' . $settings['account']['password'] . '" --mail="' . $settings['account']['mail'] . '" -y -r ' . $drupalRoot);
-    $process->execute($drush . ' user-add-role "' . $settings['account']['role'] . '" --mail="' . $settings['account']['mail'] . '" -y -r ' . $drupalRoot);
-    $process->execute($drush . ' user-password ' . $settings['account']['name'] . ' --password="' . $settings['account']['password'] . '" -y -r ' . $drupalRoot);
+    $event->getIO()->write("Create site user");
+    $process->execute($drush . ' user-create ' . getenv('ACCOUNT_NAME') . ' --password="' . getenv('ACCOUNT_PASSWORD') . '" --mail="' . getenv('ACCOUNT_MAIL') . '" -y -r ' . $drupalRoot);
+    $process->execute($drush . ' user-password ' . getenv('ACCOUNT_NAME') . ' --password="' . getenv('ACCOUNT_PASSWORD') . '" -y -r ' . $drupalRoot);
+    foreach (explode(',',getenv('ACCOUNT_ROLE')) as $role) {
+      if (!empty($role)) {
+        $process->execute($drush . ' user-add-role "' . $role . '" --mail="' . getenv('ACCOUNT_MAIL') . '" -y -r ' . $drupalRoot);
+      }
+    }
   }
 
   /**

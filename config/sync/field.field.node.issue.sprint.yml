@@ -1,0 +1,29 @@
+uuid: ba12729c-5bf8-4836-bb7c-fbf4ec28e8d2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.sprint
+    - node.type.issue
+    - taxonomy.vocabulary.sprint
+id: node.issue.sprint
+field_name: sprint
+entity_type: node
+bundle: issue
+label: Sprint
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      sprint: sprint
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

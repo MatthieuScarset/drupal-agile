@@ -53,9 +53,9 @@
 /.vagrant/
 
 # Ignore dev files
-.lando.yml
-.drush.yml
+.env
 *.log
+.lando.yml
 
 # Ignore local config for dev.
 config/local/*.yml

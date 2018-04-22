@@ -1,0 +1,9 @@
+uuid: 381eee77-085b-4f40-b6d7-3754edb04918
+langcode: en
+status: true
+dependencies: {  }
+id: analyst
+label: 'Business Analyst'
+weight: -7
+is_admin: null
+permissions: {  }

@@ -1,0 +1,8 @@
+uuid: ec2055e5-8b55-40a4-a744-692f448040b4
+langcode: en
+status: true
+dependencies: {  }
+id: discussion
+label: Discussion
+target_entity_type_id: node
+description: ''

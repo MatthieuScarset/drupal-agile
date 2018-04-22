@@ -15,6 +15,7 @@ mode: default
 content: {  }
 hidden:
   avatar: true
+  email: true
   first_name: true
   langcode: true
   last_name: true

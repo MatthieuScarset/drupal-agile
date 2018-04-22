@@ -1,0 +1,23 @@
+uuid: 503bd14a-9b3e-4b44-8902-f7dc299efc1b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.estimate
+    - node.type.issue
+id: node.issue.estimate
+field_name: estimate
+entity_type: node
+bundle: issue
+label: Estimate
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: !!float 0
+  max: null
+  prefix: ''
+  suffix: points
+field_type: float

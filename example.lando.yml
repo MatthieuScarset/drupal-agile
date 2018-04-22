@@ -3,6 +3,11 @@ recipe: drupal8
 config:
   webroot: docroot
   # ==========================
+  # Prevent errors
+  # @see https://github.com/lando/lando/issues/908#issue-316416561
+  # ==========================
+  database: 'mysql:5.7'
+  # ==========================
   # Enable XDebug
   # @see https://gist.github.com/MatthieuScarset/0c3860def9ff1f0b84e32f618c740655 
   # ==========================
@@ -19,58 +24,48 @@ tooling:
     service: node      
 events:
   post-start:
-    - echo "=========================="
+    #########################################################
+    # DAILY UPDATE - Keep your codebase up to date.
+    #########################################################
     - echo "Installing dependencies..."
-    - echo "=========================="
     - appserver: "cd $LANDO_MOUNT/ && composer install --no-interaction --optimize-autoloader"
     #
-    # FIRST INSTALL
-    #
-    # Remove those lines after first install "lando start".
-    - echo "=========================="
-    - echo "Preparing first install"
-    - echo "=========================="
-    - appserver: "cd $LANDO_MOUNT/ && composer generate-salt"
-    - appserver: "cd $LANDO_MOUNT/ && composer fix-permissions"
-    # 
+    #########################################################
+    # FIRST INSTALL - Remove those lines after first install.
     # Drupal automatic install with config_installer profile.
     # @see docroot/sites/default/settings.php
     # @see docroot/sites/default/settings.local.php
     # @see scripts/composer/ScriptHandler::siteInstall()
-    # @see scripts/composer/ScriptHandler::siteConfig()
     # @see scripts/composer/ScriptHandler::siteUser()
-    - echo "=========================="
-    - echo "Installing Drupal..."
-    - echo "=========================="    
-    - appserver: "cd $LANDO_MOUNT/ && composer site-install"
-    - appserver: "cd $LANDO_MOUNT/ && composer site-config"
-    - appserver: "cd $LANDO_MOUNT/ && composer site-user"
+    #########################################################
+    - echo "First install"
+    - appserver: "cd $LANDO_MOUNT/ && composer first-install"
+    - echo "Building theme assets..."
     #
-    # END OF FIRST INSTALL
-    #
-    # Uncomment those lines once site's installed.
-    #- echo "=========================="
+    #########################################################
+    # DAILY UPDATE - To be run everyday after lando start.
+    #########################################################
     #- echo "Updating database..."
-    #- echo "=========================="
     #- appserver: "cd $LANDO_MOUNT/ && ./bin/drush cim -r docroot"
     #- appserver: "cd $LANDO_MOUNT/ && ./bin/drush entup -r docroot"
     #- appserver: "cd $LANDO_MOUNT/ && ./bin/drush updb -r docroot"
     #- appserver: "cd $LANDO_MOUNT/ && ./bin/drush locale-update -r docroot"
     #- appserver: "cd $LANDO_MOUNT/ && ./bin/drush cr -r docroot"
-    - echo "=========================="
     - echo "Building theme assets..."
-    - echo "=========================="
     - node: "cd $LANDO_MOUNT && npm run reset"
     - appserver: "cd $LANDO_MOUNT/ && ./bin/drush cr -r docroot"    
-    #- echo "=========================="
+    #
+    #########################################################
+    # TESTING - The most important thing in the world.
+    #########################################################
     #- echo "Checking coding standards..."
-    #- echo "=========================="
     #- node: "cd $LANDO_MOUNT && npm run lint"
     #- appserver: "cd $LANDO_MOUNT/ && composer code-review"
+    #- echo "SonarQubing..."
+    #- echo "PHPUniting..."
     #
-    # That last one is just for fun :)
-    #
-    #- echo "=========================="
+    #########################################################
+    # Just for fun :)
+    #########################################################
     #- echo "Calculating statistics..."
-    #- echo "=========================="
     #- node: "cd $LANDO_MOUNT && npm run stats"    

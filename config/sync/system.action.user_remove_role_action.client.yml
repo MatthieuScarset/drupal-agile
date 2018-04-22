@@ -1,0 +1,14 @@
+uuid: e1178af4-7dbf-46bc-a6e8-9624a892f6f9
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.client
+  module:
+    - user
+id: user_remove_role_action.client
+label: 'Remove the Client role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: client

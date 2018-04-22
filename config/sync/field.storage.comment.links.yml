@@ -1,0 +1,19 @@
+uuid: 15cfcc5f-81a5-47fe-91fc-7dfe055f69d1
+langcode: en
+status: true
+dependencies:
+  module:
+    - comment
+    - link
+id: comment.links
+field_name: links
+entity_type: comment
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

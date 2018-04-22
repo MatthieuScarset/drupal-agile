@@ -1,0 +1,25 @@
+uuid: 5673d7d1-2141-43c5-88d3-ffbd996a2170
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.issues
+    - node.type.release
+id: node.release.issues
+field_name: issues
+entity_type: node
+bundle: release
+label: Issues
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: issues
+      display_name: issues_for_release
+      arguments: {  }
+field_type: entity_reference

@@ -1,0 +1,21 @@
+uuid: 03a54599-67f8-48b5-8076-57a7f58484e0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.dates
+    - taxonomy.vocabulary.sprint
+  module:
+    - datetime_range
+id: taxonomy_term.sprint.dates
+field_name: dates
+entity_type: taxonomy_term
+bundle: sprint
+label: Dates
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: daterange

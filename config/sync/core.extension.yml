@@ -4,6 +4,10 @@ module:
   block: 0
   breakpoint: 0
   comment: 0
+  config_translation: 0
+  contact: 0
+  datetime: 0
+  datetime_range: 0
   dblog: 0
   dynamic_page_cache: 0
   field: 0
@@ -14,6 +18,7 @@ module:
   inline_entity_form: 0
   language: 0
   link: 0
+  locale: 0
   media: 0
   menu_ui: 0
   node: 0
@@ -27,6 +32,7 @@ module:
   update: 0
   user: 0
   views_ui: 0
+  workflows: 0
   menu_link_content: 1
   views: 10
   minimal: 1000

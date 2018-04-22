@@ -1,0 +1,17 @@
+uuid: d9a1862e-646b-467d-943f-653bf3b3e63f
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Issue
+type: issue
+description: ''
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: false

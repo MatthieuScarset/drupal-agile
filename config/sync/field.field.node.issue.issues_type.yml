@@ -1,0 +1,33 @@
+uuid: 631425c6-7734-43e8-95cc-f08f8055fd19
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.issues_type
+    - node.type.issue
+    - taxonomy.vocabulary.issue_type
+  content:
+    - 'taxonomy_term:issue_type:a2410528-e2da-4835-9865-9f83e94f58d4'
+id: node.issue.issues_type
+field_name: issues_type
+entity_type: node
+bundle: issue
+label: Type
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    target_uuid: a2410528-e2da-4835-9865-9f83e94f58d4
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      issue_type: issue_type
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

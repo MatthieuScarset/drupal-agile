@@ -1,0 +1,14 @@
+uuid: f210c869-cfd6-4e4e-8fff-0791953ed284
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.analyst
+  module:
+    - user
+id: user_remove_role_action.analyst
+label: 'Remove the Business Analyst role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: analyst

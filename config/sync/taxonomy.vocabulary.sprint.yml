@@ -1,0 +1,9 @@
+uuid: c5bed5df-dc41-4e93-af6f-eedf208df25a
+langcode: en
+status: true
+dependencies: {  }
+name: Sprint
+vid: sprint
+description: 'A period of time to complete a list of issues'
+hierarchy: 0
+weight: 0

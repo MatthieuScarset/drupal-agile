@@ -1,0 +1,22 @@
+uuid: fabed4df-4b36-4e51-873f-5beeda93c4af
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.issue
+  module:
+    - text
+id: node.issue.body
+field_name: body
+entity_type: node
+bundle: issue
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+field_type: text_with_summary
