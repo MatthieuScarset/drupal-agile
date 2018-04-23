@@ -178,7 +178,7 @@ class ScriptHandler {
 
     // Create the files directory with chmod 0666
     if (!$fs->exists($composerRoot . '/.env') and $fs->exists($composerRoot . '/example.env')) {
-      $fs->copy($composerRoot . 'example.env', $composerRoot . '.env');
+      $fs->copy($composerRoot . '/example.env', $composerRoot . '.env');
       $fs->chmod($composerRoot . '.env', 0666);
       $event->getIO()->write("Created .env file with chmod 0666");
     }
